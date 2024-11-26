@@ -1,0 +1,26 @@
+<app-header title="Autenticacion" [isModal]="isModal"></app-header>
+
+<ion-content [fullscreen]="true">
+    <div class="d-flex-center">
+        <form [formGroup]="group" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+            <app-logo></app-logo>
+            <app-custom-input autocomplete="email" icon="mail-outline" [control]="group.controls.email" type="email"
+                label="Correo"></app-custom-input>
+            <app-custom-input icon="lock-closed-outline" [control]="group.controls.password" type="password"
+                label="Contraseña">
+            </app-custom-input>
+            <!-- Forgot pass -->
+             <p class="ion-text-end" routerLink="forgot-password">¿Olvido su contraseña?</p>
+            <ion-button type="submit" expand="block" mode="ios" class="submit" [disabled]="group.invalid">
+                Ingresar
+                <ion-icon slot="end" name="log-in-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block" mode="ios"  routerLink="sign-up">
+                Registrarse
+                <ion-icon slot="end" name="person-add-outline"></ion-icon>
+            </ion-button>
+        </form>
+    </div>
+
+
+</ion-content>

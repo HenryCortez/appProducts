@@ -1,0 +1,26 @@
+<app-header title="Crear Usuario" [isModal]="isModal" backButton="auth"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="d-flex-center">
+    <form [formGroup]="group" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+      <app-logo></app-logo>
+      <app-custom-input autocomplete="name" icon="person-outline" [control]="group.controls.name" type="text"
+        label="Nombre de usuario"></app-custom-input>
+      <app-custom-input autocomplete="email" icon="mail-outline" [control]="group.controls.email" type="email"
+        label="Correo"></app-custom-input>
+      
+      <app-custom-input icon="lock-closed-outline" [control]="group.controls.password" type="password"
+        label="Contraseña">
+      </app-custom-input>
+      <!-- Forgot pass -->
+      
+      <ion-button type="submit" expand="block" mode="ios" class="submit" [disabled]="group.invalid">
+        Registrarse
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+      
+    </form>
+  </div>
+
+
+</ion-content>
