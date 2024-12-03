@@ -15,17 +15,19 @@ export class UtilsService {
 
   async presentAlert(opts:AlertOptions) {
     const alert = await this.alertCtrl.create(opts); 
-    await alert.present();
+    return alert;
   }
 
   async presentToast(opts:ToastOptions) {
     const toast = await this.toastCtrl.create(opts);
-    toast.present();
+    return toast;
   }
 
-  async presentLoading(opts:LoadingOptions) {
-    const loading = await this.loadingCtrl.create(opts);
-    await loading.present();
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      spinner: 'crescent',
+    });
+    return loading;
   }
 
   routerLink(url:string) {
