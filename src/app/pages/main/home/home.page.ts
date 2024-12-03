@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product.interface';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { AddUpdateComponent } from 'src/app/shared/components/add-update/add-update.component';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  firebaseSvc = inject(FirebaseService);
+  utilsSvc = inject(UtilsService);
   constructor() { }
 
   ngOnInit() {
   }
-
+  async addUpdateProduct() {
+    let sucess = await this.utilsSvc.presentModal({
+      component: AddUpdateComponent,
+      cssClass: 'add-update-modal',
+      
+    })
+  }
+  
 }

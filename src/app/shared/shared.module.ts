@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddUpdateComponent } from './components/add-update/add-update.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     LogoComponent,
     HeaderComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    AddUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     CustomInputComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AddUpdateComponent
   ]
 })
 export class SharedModule { }

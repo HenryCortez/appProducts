@@ -1,0 +1,66 @@
+<app-header title="Crear Usuario" [isModal]="isModal"></app-header>
+<ion-content [fullscreen]="true">
+  <div class="d-flex-center">
+    <form
+      [formGroup]="group"
+      class="ion-padding ion-text-center"
+      (ngSubmit)="submit()"
+      (keypress.enter)="submit()">
+
+      <ion-avatar *ngIf="group.value.image">
+        <img [src]="group.value.image" />
+      </ion-avatar>
+
+      <ion-icon class="image-icon" slot="start" name="image-outline" *ngIf="!group.value.image"></ion-icon>
+      <!-- Name -->
+       <br>
+       <!-- BOton para cargar imagen -->
+        <ion-button
+          expand="block"
+          mode="ios"
+          type="button"
+          (click)="takeImage()"
+          size="small"
+          shape="round">
+          Tomar/seleccionar
+          <ion-icon slot="end" name="image-outline">
+
+          </ion-icon>
+        </ion-button>
+      <app-custom-input
+      autocomplete="name"
+      icon="person-outline"
+      [control]="group.controls.name"
+      type="text"
+      label="Producto"
+    ></app-custom-input>
+      <!-- Email -->
+      <app-custom-input
+        autocomplete="price"
+        icon="mail-outline"
+        [control]="group.controls.price"
+        type="number"
+        label="Precio"
+      ></app-custom-input>
+      
+      <app-custom-input
+        autocomplete="soldUnits"
+        icon="mail-outline"
+        [control]="group.controls.soldUnits"
+        type="number"
+        label="Unidades vendidas"
+      ></app-custom-input>
+      
+      <!-- Login -->
+      <ion-button
+        expand="block"
+        mode="ios"
+        class="submit"
+        type="submit"
+        [disabled]="group.invalid">
+      Registrar
+      <ion-icon slot="end" name="person-add-outline"></ion-icon>
+    </ion-button>
+    </form>
+  </div>
+</ion-content>

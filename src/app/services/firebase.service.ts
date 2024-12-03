@@ -68,8 +68,11 @@ export class FirebaseService {
     return deleteDoc(doc(getFirestore(), path));
   }
 
-  async getDocument(path:string) {
-    const docSnap = await getDoc(doc(getFirestore(), path));
-    return docSnap.data();
+  async getDocument(path:string){
+    return (await getDoc(doc(getFirestore(),path))).data()
+  }
+  //enviar email de reseteo
+  async sendResetEmail(email:string) {
+    return sendPasswordResetEmail(this.getAuth(), email);
   }
 }

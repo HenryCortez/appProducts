@@ -21,12 +21,57 @@ export class AuthPage implements OnInit {
    utilsSvc = inject(UtilsService);
   ngOnInit() {
   }
-  submit() {
+  async submit() {
     if(this.group.valid){
+      const loading = await this.utilsSvc.presentLoading();
+      loading.present();
       this.firebaseSvc.signIn(this.group.value as User)
-      .then((res) => {
-        console.log(res);
+      .then(async(res) => {
+        await this.getUserInfo(res.user?.uid!);
       })
+      .catch(async(err) => {
+        this.utilsSvc.presentToast({
+          message: err.message,
+          color: 'danger',
+          position: 'top',
+          duration: 2000,
+          icon: 'alert-circle-outline'
+        }).then(toast => toast.present());
+      })
+      .finally(() => loading.dismiss());
+    }
+  }
+
+  async getUserInfo(uid:string){
+    if (this.group.valid) {
+      const loading = await this.utilsSvc.presentLoading();
+      loading.present()
+      let path = `users/${uid}`
+      this.firebaseSvc.getDocument(path)
+        .then((data) => {
+          const user = data as User;
+          this.utilsSvc.saveInLocalStorage('user', user)
+          this.utilsSvc.routerLink('main/home')
+          this.group.reset();
+
+        this.utilsSvc.presentToast({
+          message: 'Welcome back!',
+          color: 'success',
+          position: 'top',
+          duration: 2000,
+          icon: 'checkmark-circle-outline'
+        }).then(toast => toast.present());
+      })
+      .catch(async (err) => {
+        this.utilsSvc.presentToast({
+          message: err.message,
+          color: 'danger',
+          position: 'top',
+          duration: 2000,
+          icon: 'alert-circle-outline'
+        }).then(toast => toast.present());
+      })
+      .finally(() => loading.dismiss());
     }
   }
 }
