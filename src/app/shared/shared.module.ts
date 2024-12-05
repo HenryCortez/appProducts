@@ -20,7 +20,8 @@ import { AddUpdateComponent } from './components/add-update/add-update.component
     CommonModule,
     IonicModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   exports: [
     LogoComponent,

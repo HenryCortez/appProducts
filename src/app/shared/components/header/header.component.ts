@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +10,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() isModal: boolean = false;
   @Input() title: string = '';
+  firebaseSvc = inject(FirebaseService);
+  utilsSvc = inject(UtilsService);
   dismiss() {
-    throw new Error('Method not implemented.');
+    if (this.isModal) {
+       this.utilsSvc.dissmisModal();
+    } else {
+      // this.utilsSvc.routerLink('/home');
+    }
   }
   @Input() backButton: string ='';
 
