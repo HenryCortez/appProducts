@@ -12,9 +12,12 @@ import { AddUpdateComponent } from 'src/app/shared/components/add-update/add-upd
 export class HomePage implements OnInit {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
+  productsToUse?: any[];
+  totalEarnings: number = 0;
   constructor() { }
 
   ngOnInit() {
+   this.getProducts();
   }
   async addUpdateProduct() {
     let sucess = await this.utilsSvc.presentModal({
@@ -23,5 +26,19 @@ export class HomePage implements OnInit {
       
     })
   }
-  
+
+  async getProducts() {
+    let loading = await this.utilsSvc.presentLoading();
+    await loading.present();
+    let user = this.utilsSvc.getFromLocalStorage('user');
+    let path = `users/${user.uid}/products`;
+    let products = await this.firebaseSvc.getCollectionData(path);
+    console.log(products);
+    loading.dismiss();
+    this.productsToUse = products;
+    this.calculateTotalEarnings();
+  }
+  calculateTotalEarnings() {
+    this.totalEarnings = this.productsToUse?.reduce((acc: number, product: { price: number; soldUnits: number; }) => acc + (product.price * product.soldUnits), 0);
+  }
 }

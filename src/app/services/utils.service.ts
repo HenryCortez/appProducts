@@ -1,10 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AlertController, AlertOptions, LoadingController, LoadingOptions, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import {
+  AlertController,
+  AlertOptions,
+  LoadingController,
+  LoadingOptions,
+  ModalController,
+  ModalOptions,
+  ToastController,
+  ToastOptions,
+} from '@ionic/angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilsService {
   alertCtrl = inject(AlertController);
@@ -12,14 +21,14 @@ export class UtilsService {
   loadingCtrl = inject(LoadingController);
   modalCtrl = inject(ModalController);
   route = inject(Router);
-  constructor() { }
+  constructor() {}
 
-  async presentAlert(opts:AlertOptions) {
-    const alert = await this.alertCtrl.create(opts); 
+  async presentAlert(opts: AlertOptions) {
+    const alert = await this.alertCtrl.create(opts);
     return alert;
   }
 
-  async presentToast(opts:ToastOptions) {
+  async presentToast(opts: ToastOptions) {
     const toast = await this.toastCtrl.create(opts);
     return toast;
   }
@@ -31,45 +40,41 @@ export class UtilsService {
     return loading;
   }
 
-  routerLink(url:string) {
+  routerLink(url: string) {
     this.route.navigateByUrl(url);
   }
 
-  saveInLocalStorage(key:string, value:any) {
+  saveInLocalStorage(key: string, value: any) {
     return localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getFromLocalStorage(key:string) {
+  getFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key)!);
   }
 
-  async presentModal(opts:ModalOptions){
-  
-      const modal = await this.modalCtrl.create(opts);
-    
-      modal.present();
-    
-      const { data } = await modal.onWillDismiss();
-      if(data)
-        return data;
-      
+  async presentModal(opts: ModalOptions) {
+    const modal = await this.modalCtrl.create(opts);
+
+    modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) return data;
   }
 
-  dissmisModal(data?:any) {
+  dissmisModal(data?: any) {
     return this.modalCtrl.dismiss(data);
   }
 
   async takePicture(promptLabelHeader: string) {
     console.log('takePicture');
     return await Camera.getPhoto({
-    quality: 90,
-    allowEditing: true,
-    resultType: CameraResultType.DataUrl,
-    source: CameraSource.Prompt,
-    promptLabelHeader,
-    promptLabelPhoto: 'Selecciona una imagen',
-    promptLabelPicture: 'Toma una foto'
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
+      promptLabelHeader,
+      promptLabelPhoto: 'Selecciona una imagen',
+      promptLabelPicture: 'Toma una foto',
     });
-    };
-    
+  }
 }

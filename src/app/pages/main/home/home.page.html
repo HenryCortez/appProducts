@@ -1,5 +1,39 @@
 <app-header title="Inicio">
 </app-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <div class="stat-container">
+              <h2>{{ productsToUse?.length }}</h2>
+              <p>Productos</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="ion-text-right">
+            <div class="stat-container">
+              <h2>{{ totalEarnings | currency }}</h2>
+              <p>Ganancias</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let product of productsToUse" (click)="addUpdateProduct()">
+      <ion-avatar slot="start">
+        <img [src]="product.image" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.price }}</p>
+        <p>{{ product.soldUnits }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="addUpdateProduct()">
     <ion-icon name="add"></ion-icon>
