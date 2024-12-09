@@ -36,7 +36,7 @@ export class AddUpdateComponent implements OnInit {
     const dataUrl = (await this.utilsSvc.takePicture('Imagen del Producto'))
       .dataUrl;
     this.group.controls.image.setValue(dataUrl!);
-    this.group.controls.name.setValue(dataUrl!);
+   
   }
   submit() {
     if (this.group.valid) {

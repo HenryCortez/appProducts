@@ -25,6 +25,7 @@ export class UtilsService {
 
   async presentAlert(opts: AlertOptions) {
     const alert = await this.alertCtrl.create(opts);
+    await alert.present();
     return alert;
   }
 
