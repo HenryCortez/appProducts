@@ -36,6 +36,7 @@ export class AddUpdateComponent implements OnInit {
     const dataUrl = (await this.utilsSvc.takePicture('Imagen del Producto'))
       .dataUrl;
     this.group.controls.image.setValue(dataUrl!);
+   
   }
   submit() {
     if (this.group.valid) {
@@ -51,7 +52,8 @@ export class AddUpdateComponent implements OnInit {
     if (price.value) price.setValue(price.value);
   }
   async createProduct() {
-    let path = `users/${this.user.uid}/products`;
+    let path = `users/${this.user.uid}/products/${this.group.value.id || this.firebaseSvc.generateId()}`;
+    console.log(path);
     const loading = await this.utilsSvc.presentLoading();
     await loading.present();
     // === Subir la imagen y obtener la url ===

@@ -1,0 +1,36 @@
+.stat-card {
+  background-color: #007bff; /* Fondo azul */
+  color: white; /* Letras blancas */
+}
+
+.stat-container {
+  text-align: center;
+}
+
+.stat-container h2 {
+  margin: 0;
+  font-size: 2rem; /* Tamaño de fuente para los números */
+}
+
+.stat-container p {
+  margin: 0;
+  font-size: 1rem; /* Tamaño de fuente para las palabras */
+  color: white; /* Letras blancas */
+}
+
+.product-list {
+  margin: 10px; /* Ajusta el margen según sea necesario */
+}
+
+
+.earnings-box {
+  background-color: #007bff; /* Fondo azul */
+  color: white; /* Letras blancas */
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.small-option-btn {
+  min-width: 50px; /* Ajusta el ancho mínimo según sea necesario */
+  max-width: 50px; /* Ajusta el ancho máximo según sea necesario */
+}

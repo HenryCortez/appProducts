@@ -1,5 +1,54 @@
 <app-header title="Inicio">
 </app-header>
+<ion-content [fullscreen]="true">
+  <ion-card class="stat-card">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <div class="stat-container">
+              <h2>{{ productsToUse?.length }}</h2>
+              <p>Productos</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="ion-text-right">
+            <div class="stat-container">
+              <h2>{{ totalEarnings | currency }}</h2>
+              <p>Ganancias</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list class="product-list">
+    <ion-item-sliding *ngFor="let product of productsToUse">
+      <ion-item class="product-item">
+        <ion-avatar slot="start" *ngIf="!product.editMode">
+          <img [src]="product.image" />
+        </ion-avatar>
+        <ion-label>
+          <h2 class="name">{{ product.name }}</h2>
+          <p class="data"><strong>Precio:</strong> ${{ product.price }}</p>
+          <p class="data"><strong>Unidades vendidas:</strong> {{ product.soldUnits }}</p>
+          <div class="earnings-box">
+            <p><strong>Cantidad recaudada:</strong> ${{ product.price * product.soldUnits }}</p>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="primary" (click)="addUpdateProduct(product)" class="small-option-btn">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="deleteProduct(product)" class="small-option-btn">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="addUpdateProduct()">
     <ion-icon name="add"></ion-icon>

@@ -14,6 +14,7 @@ import {
   setDoc,
   doc,
   getDoc,
+  getDocs,
   addDoc,
   collection,
   collectionData,
@@ -22,6 +23,8 @@ import {
   deleteDoc,
   CollectionReference,
 } from '@angular/fire/firestore';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   getStorage,
   ref,
@@ -63,9 +66,10 @@ export class FirebaseService {
     });
   }
 
-  getCollectionData(path: string, collectionQuery?: any) {
+  async getCollectionData(path: string) {
     const ref = collection(getFirestore(), path);
-    return collectionData(query(ref, ...collectionQuery), { idField: 'id' });
+    const snapshot = await getDocs(ref);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   //setear doc
@@ -92,12 +96,10 @@ export class FirebaseService {
   }
 
   async uploadImage(path: string, data_url: string) {
-    return uploadString(ref(getStorage(), path), data_url, 'data_url').then(
-      () => {
-        return getDownloadURL(ref(getStorage(), path));
-      }
-    );
-  }
+    return uploadString(ref(getStorage(), path), data_url, 'data_url').then(() => {
+    return getDownloadURL(ref(getStorage(), path))
+    })
+    }
   //====== Obtener ruta de la imagen con su url =====
   async getFilePath(url: string) {
     return ref(getStorage(), url).fullPath;
@@ -105,5 +107,9 @@ export class FirebaseService {
   //====== Eliminar archivo =====
   deleteFile(path: string) {
     return deleteObject(ref(getStorage(), path));
+  }
+
+  generateId() {
+    return uuidv4();
   }
 }
