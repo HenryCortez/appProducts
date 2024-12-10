@@ -55,7 +55,7 @@ export class AuthPage implements OnInit {
           this.group.reset();
 
         this.utilsSvc.presentToast({
-          message: 'Welcome back!',
+          message: 'Bienvenido de nuevo ' + user.name,
           color: 'success',
           position: 'top',
           duration: 2000,

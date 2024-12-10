@@ -5,6 +5,7 @@
       <ion-button (click)="dismiss()" *ngIf="isModal">
         <ion-icon slot="start" name="close-circle-outline"></ion-icon>
       </ion-button>
+      <ion-menu-button *ngIf="showMenu" menu="menu-content"></ion-menu-button>
     </ion-buttons>
     <ion-title>
       <strong>{{ title }}</strong>
