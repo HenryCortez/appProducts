@@ -32,12 +32,16 @@ import {
   getDownloadURL,
   deleteObject,
 } from 'firebase/storage';
+import { UtilsService } from './utils.service';
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
+  utilsSvc = inject(UtilsService);
   signOut() {
-    throw new Error('Method not implemented.');
+    getAuth().signOut();
+    localStorage.removeItem('user');
+    this.utilsSvc.routerLink('/auth');
   }
   auth = inject(AngularFireAuth);
   constructor() {}

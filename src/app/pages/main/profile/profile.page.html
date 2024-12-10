@@ -1,13 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [showMenu]="true" title="Perfil">
+</app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-avatar class="profile-avatar">
+        <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+      </ion-avatar>
+      <ion-card-title>John Doe</ion-card-title>
+    
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>Nombre</h2>
+            <p>John Doe</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Correo Electrónico</h2>
+         
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teléfono</h2>
+            <p>+1 234 567 890</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Dirección</h2>
+            <p>1234 Main St, Anytown, USA</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+    
 </ion-content>
