@@ -58,8 +58,8 @@
         class="submit"
         type="submit"
         [disabled]="group.invalid">
-      Registrar
-      <ion-icon slot="end" name="person-add-outline"></ion-icon>
+        {{product ? 'Actualizar Producto' : 'Agregar Producto'}}
+        <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
     </ion-button>
     </form>
   </div>

@@ -36,6 +36,9 @@ import {
   providedIn: 'root',
 })
 export class FirebaseService {
+  signOut() {
+    throw new Error('Method not implemented.');
+  }
   auth = inject(AngularFireAuth);
   constructor() {}
   //autentificacion

@@ -10,6 +10,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class HeaderComponent implements OnInit {
   @Input() isModal: boolean = false;
   @Input() title: string = '';
+  @Input() showMenu!: boolean;
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
   dismiss() {
